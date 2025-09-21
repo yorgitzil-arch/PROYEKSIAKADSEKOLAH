@@ -1,0 +1,252 @@
+/* Pastikan carousel-container memiliki posisi relative untuk child absolute */
+.carousel-container {
+    position: relative;
+    height: 500px; /* Default height */
+    overflow: hidden; /* Penting untuk carousel */
+}
+
+/* Responsive height for carousel */
+@media (min-width: 768px) { /* md breakpoint */
+    .carousel-container {
+        height: 600px;
+    }
+}
+@media (min-width: 1024px) { /* lg breakpoint */
+    .carousel-container {
+        height: 700px;
+    }
+}
+
+/* Style untuk setiap slide carousel */
+.carousel-slide {
+    position: absolute; /* Menggunakan absolute untuk tumpukan slide */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 1; /* Default z-index for slide */
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    z-index: 2; /* Active slide on top */
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Caption dan tombol PPDB (DIATAS LAGI, agar tidak tertutup ikon statistik) */
+.carousel-caption {
+    position: absolute;
+    bottom: 25%; /* NILAI INI TETAP TINGGI agar tidak tertutup */
+    left: 8%; /* From left */
+    max-width: 700px; /* Limit text width */
+    color: white;
+    text-align: left; /* Left-aligned text */
+    z-index: 3; /* Ensure on top of slides */
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.7); /* Text shadow for readability */
+}
+
+.carousel-caption h2 {
+    margin-bottom: 1rem; /* Space between title and description */
+}
+
+.carousel-caption .carousel-button-wrapper {
+    margin-top: 2rem; /* Space between description and button */
+    text-align: left; /* Buttons also left-aligned */
+}
+
+/* Untuk counter animation */
+.counter-value {
+    font-size: 3rem; /* Default size */
+    font-weight: bold;
+    color: #1a202c; /* Text color */
+}
+
+/* Untuk responsivitas, sesuaikan ukuran teks dan ikon pada breakpoint tertentu */
+@media (min-width: 768px) { /* md breakpoint */
+    .counter-value {
+        font-size: 3.5rem;
+    }
+    .carousel-caption {
+        bottom: 28%; /* Move up slightly on desktop */
+        left: 10%; /* Move in slightly on desktop */
+    }
+}
+@media (min-width: 1024px) { /* lg breakpoint */
+    .counter-value {
+        font-size: 4rem;
+    }
+    .carousel-caption {
+        bottom: 30%; /* Move up further on larger screens */
+        left: 12%; /* Move in further on larger screens */
+    }
+}
+
+/* ================================================================ */
+/* CSS BARU DAN PERBAIKAN UNTUK JUDUL BAGIAN (JAJAR GENJANG DENGAN IKON DAN GARIS BAWAH) */
+/* ================================================================ */
+.section-heading-container {
+    display: flex;
+    align-items: flex-end; /* Align items to the bottom */
+    margin-bottom: 2.5rem; /* Increased space below the entire heading block */
+    position: relative; /* For absolute positioning of the line */
+}
+
+.section-heading {
+    position: relative;
+    background-color: #ebf8ff; /* bg-blue-100 */
+    color: #1a202c; /* text-gray-800 */
+    padding: 0.8rem 1.8rem 0.8rem 1.5rem; /* Top, Right, Bottom, Left padding - adjusted for better vertical alignment */
+    font-size: 1.5rem; /* text-4xl */
+    font-weight: 800; /* font-extrabold */
+    white-space: nowrap; /* Prevent text wrapping */
+    z-index: 1; /* Ensure it's above the line */
+    line-height: 1.2; /* Adjusted line height for better vertical centering */
+
+    /* Clip-path for parallelogram shape: left edge straight, right edge angled */
+    /* Adjusted second and third points for a sharper, more controlled slant */
+    clip-path: polygon(0% 0%, 100% 0%, calc(100% - 25px) 100%, 0% 100%);
+    /* 25px controls the slant amount. Larger value = more slant. */
+
+    display: flex; /* Use flex to align icon and text */
+    align-items: center; /* Vertically center icon and text */
+}
+
+.section-heading .icon {
+    margin-right: 0.8rem; /* Space between icon and text, slightly increased */
+    color: #4299e1; /* A nice blue for the icon */
+    font-size: 2rem; /* Size of the icon, slightly increased */
+    line-height: 1; /* Ensure icon doesn't affect line height of text */
+}
+
+.section-heading-line-container {
+    position: absolute;
+    /* Adjust this bottom value carefully to align with the bottom of the text within the heading */
+    /* This value will depend on font-size, padding, and line-height of .section-heading */
+    bottom: 0.8rem; /* Adjusted to better align with the baseline of the text */
+    left: 0;
+    width: 100%;
+    height: 3px; /* Thickness of the line, slightly thicker for prominence */
+    background-color: #cbd5e0; /* bg-gray-300 */
+    z-index: 0; /* Behind the heading */
+}
+
+/* Adjustments for responsiveness */
+@media (min-width: 768px) { /* md breakpoint */
+    .section-heading {
+        font-size: 2.5rem; /* md:text-5xl */
+        padding: 1rem 2.2rem 1rem 1.8rem; /* More padding on larger screens, adjusted for shape */
+    }
+    .section-heading .icon {
+        font-size: 2.4rem; /* Larger icon on desktop */
+        margin-right: 1rem;
+    }
+    .section-heading-line-container {
+        bottom: 1rem; /* Adjust for larger padding and font size on desktop */
+    }
+}
+/* Style baru untuk layout berita/pengumuman sampingan */
+.news-announcement-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem; /* Gap between sections */
+}
+@media (min-width: 768px) {
+    .news-announcement-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens and up */
+    }
+}
+
+/* Style untuk item berita dalam format list */
+.news-list-item {
+    display: flex;
+    align-items: flex-start; /* Align image and text to the top */
+    gap: 1rem; /* Space between image and text */
+    margin-bottom: 1.5rem; /* Space between news items */
+    padding-bottom: 1.5rem; /* Padding for separator */
+    border-bottom: 1px solid #e2e8f0; /* Border for separator (gray-200) */
+    transition: transform 0.2s ease-in-out;
+}
+.news-list-item:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+}
+.news-list-item:last-child {
+    border-bottom: none; /* No border for the last item */
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.news-list-item img {
+    width: 8rem; /* Ukuran gambar kecil (misal: 128px) */
+    height: 6rem; /* Tinggi gambar */
+    object-fit: cover;
+    border-radius: 0.5rem; /* Rounded corners */
+    flex-shrink: 0; /* Prevent image from shrinking */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.news-list-item .content {
+    flex-grow: 1; /* Allow content to take available space */
+}
+.news-list-item h3 {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 600; /* font-semibold */
+    line-height: 1.4;
+    margin-bottom: 0.3rem; /* Space between title and date */
+    color: #1a202c; /* text-gray-800 */
+}
+.news-list-item p.date {
+    font-size: 0.875rem; /* text-sm */
+    color: #4a5568; /* text-gray-600 */
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+.news-list-item p.date i {
+    margin-right: 0.5rem;
+    color: #4299e1; /* blue-500 */
+}
+.news-list-item .news-excerpt {
+    font-size: 0.95rem; /* Slightly larger than sm */
+    color: #4a5568; /* text-gray-700 */
+    line-height: 1.6;
+}
+.news-list-item .read-more {
+    margin-top: 0.75rem;
+    display: inline-block;
+    font-size: 0.9rem;
+    color: #4299e1; /* blue-600 */
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+}
+.news-list-item .read-more:hover {
+    color: #2b6cb0; /* blue-800 */
+}
+
+/* Penyesuaian untuk Pengumuman agar terlihat lebih kompak jika di samping berita */
+.announcement-card {
+    margin-bottom: 1.5rem; /* Space between announcement items */
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+.announcement-card:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.announcement-card h3 {
+    font-size: 1.25rem; /* text-xl */
+    margin-bottom: 0.3rem;
+}
+.announcement-card p.date {
+    font-size: 0.875rem; /* text-sm */
+    color: #4a5568;
+    margin-bottom: 0.5rem;
+}
+.announcement-card a {
+    font-size: 0.9rem;
+}
