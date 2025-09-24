@@ -27,19 +27,16 @@ return new class extends Migration
             // Tambahkan kolom baru untuk tipe mengajar
             // Pastikan kolom ini belum ada sebelum menambahkannya
             if (!Schema::hasColumn('assignments', 'tipe_mengajar')) {
-                $table->enum('tipe_mengajar', ['Praktikum', 'Teori'])->after('kelas_id')->nullable(); // Tambahkan nullable() jika ingin bisa null
+                $table->enum('tipe_mengajar', ['Praktikum', 'Teori', 'Teori&Praktikum'])->after('kelas_id')->nullable(); 
             }
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
         Schema::table('assignments', function (Blueprint $table) {
-            // Kembalikan kolom yang dihapus jika migrasi di-rollback
-            // Anda mungkin perlu menyesuaikan tipe data dan nullable sesuai aslinya
+    
             if (!Schema::hasColumn('assignments', 'judul_tugas')) {
                 $table->string('judul_tugas')->nullable();
             }
@@ -50,7 +47,6 @@ return new class extends Migration
                 $table->date('tanggal_deadline')->nullable();
             }
 
-            // Hapus kolom tipe_mengajar jika migrasi di-rollback
             if (Schema::hasColumn('assignments', 'tipe_mengajar')) {
                 $table->dropColumn('tipe_mengajar');
             }

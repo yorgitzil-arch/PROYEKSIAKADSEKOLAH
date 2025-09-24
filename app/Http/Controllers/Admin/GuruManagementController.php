@@ -133,10 +133,7 @@ class GuruManagementController extends Controller
                     Log::info("Wali kelas (ID: {$guru->id}) dicabut dari kelas (ID: {$kelasDiampu->id}). wali_kelas_id di kelas diset NULL.");
                 }
             }
-            // Logika penting: Jika status wali kelas berubah dari FALSE ke TRUE
-            // Ini tidak perlu dihandle di sini karena penunjukan kelas dilakukan di KelasController.
-            // Jika seorang guru dijadikan wali kelas di sini, dia belum tentu langsung mengampu kelas.
-            // Penunjukan kelas dilakukan di KelasController.
+          
 
             DB::commit(); // Commit transaksi jika berhasil
             Log::info('Akun Guru diperbarui: ' . $guru->nip . ' (Wali Kelas: ' . ($guru->is_wali_kelas ? 'Ya' : 'Tidak') . ')');
@@ -165,9 +162,6 @@ class GuruManagementController extends Controller
                 }
             }
 
-            // Cek relasi lain yang mungkin mencegah penghapusan (seperti di KelasController)
-            // Anda mungkin perlu menambahkan lebih banyak cek di sini jika guru memiliki banyak relasi
-            // Contoh:
             if ($guru->assignments()->count() > 0 ||
                 $guru->teachingMaterials()->count() > 0 ||
                 $guru->appreciations()->count() > 0 ||

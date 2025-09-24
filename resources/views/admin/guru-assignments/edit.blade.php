@@ -254,6 +254,7 @@
                                     <option value="">Pilih Tipe Mengajar</option>
                                     <option value="Praktikum" {{ old('tipe_mengajar', $assignment->tipe_mengajar) == 'Praktikum' ? 'selected' : '' }}>Praktikum</option>
                                     <option value="Teori" {{ old('tipe_mengajar', $assignment->tipe_mengajar) == 'Teori' ? 'selected' : '' }}>Teori</option>
+                                    <option value="Teori" {{ old('tipe_mengajar', $assignment->tipe_mengajar) == 'Teori&Praktikum' ? 'selected' : '' }}>Teori & Praktikum</option>
                                 </select>
                                 @error('tipe_mengajar') <span class="invalid-feedback">{{ $message }}</span> @enderror
                             </div>
@@ -359,9 +360,6 @@
                 });
             }
 
-            // Panggil saat halaman dimuat
-            // Untuk form EDIT:
-            // Ambil kelompok dari assignment yang sedang diedit
             var assignmentKelompok = '{{ $assignment->mataPelajaran->kelompok ?? '' }}';
             var currentAssignmentMataPelajaran = '{{ $assignment->mata_pelajaran_id ?? '' }}';
 
@@ -397,8 +395,7 @@
                 }
             });
 
-            // Panggil filter saat halaman dimuat untuk menerapkan filter jika old('jurusan_filter') ada
-            // atau jika sedang edit dan ada jurusan yang terpilih
+
             var initialJurusanFilter = $j('#jurusan_filter').val();
             if (initialJurusanFilter) {
                 $j('#jurusan_filter').trigger('change');
@@ -407,13 +404,12 @@
                 allKelasOptions.show();
             }
             
-            // Jaga agar kelas yang terpilih sebelumnya (old('kelas_id')) tetap terseleksi
-            // walaupun filter jurusan diterapkan
+
             var oldKelasId = "{{ old('kelas_id', $assignment->kelas_id ?? '') }}";
             if (oldKelasId) {
                 $j('#kelas_id').val(oldKelasId);
             }
-            // === AKHIR LOGIKA FILTER KELAS ===
+
         });
     </script>
 @endpush

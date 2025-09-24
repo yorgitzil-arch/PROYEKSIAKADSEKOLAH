@@ -253,6 +253,7 @@
                                     <option value="">Pilih Tipe Mengajar</option>
                                     <option value="Praktikum" {{ old('tipe_mengajar') == 'Praktikum' ? 'selected' : '' }}>Praktikum</option>
                                     <option value="Teori" {{ old('tipe_mengajar') == 'Teori' ? 'selected' : '' }}>Teori</option>
+                                    <option value="Teori" {{ old('tipe_mengajar') == 'Teori&Praktikum' ? 'selected' : '' }}>Teori & Praktikum</option>
                                 </select>
                                 @error('tipe_mengajar') <span class="invalid-feedback">{{ $message }}</span> @enderror
                             </div>

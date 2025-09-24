@@ -90,7 +90,7 @@ class GuruAssignmentController extends Controller
             'mata_pelajaran_id' => 'required|exists:mata_pelajarans,id', 
             'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id',
             'semester_id' => 'required|exists:semesters,id',
-            'tipe_mengajar' => ['required', Rule::in(['Praktikum', 'Teori', 'Teori & Praktikum'])],
+            'tipe_mengajar' => ['required', Rule::in(['Praktikum', 'Teori', 'Teori&Praktikum'])],
             'status_konfirmasi' => ['required', Rule::in(['Pending', 'Dikonfirmasi', 'Ditolak'])],
         ]);
 
@@ -149,7 +149,7 @@ class GuruAssignmentController extends Controller
             'mata_pelajaran_id' => 'required|exists:mata_pelajarans,id', 
             'tahun_ajaran_id' => 'required|exists:tahun_ajarans,id',
             'semester_id' => 'required|exists:semesters,id',
-            'tipe_mengajar' => ['required', Rule::in(['Praktikum', 'Teori'])],
+            'tipe_mengajar' => ['required', Rule::in(['Praktikum', 'Teori', 'Teori&Praktikum'])],
             'status_konfirmasi' => ['required', Rule::in(['Pending', 'Dikonfirmasi', 'Ditolak'])],
         ]);
 
